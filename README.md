@@ -1,0 +1,1 @@
+Example of a mixed Java and groovy project built using gradle. Useful as a starting point or a sanity check for your build system. The project layout assumes that both .groovy and .java files are located under `src/xyz/java`. The build file also contains a basic configuration for an additional source set.
