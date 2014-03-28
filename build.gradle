@@ -1,0 +1,48 @@
+apply plugin: 'groovy'
+sourceCompatibility = 1.7
+
+repositories {
+    mavenCentral()
+}
+
+sourceSets {
+	main {
+		java {
+			srcDirs = []
+		}
+		groovy {
+			srcDirs = ['src/main/java']
+		}
+		resources {
+			exclude 'properties/spring.properties'
+		}
+	}
+	test {
+        java {
+            srcDirs = []
+        }
+		groovy {
+			srcDirs = ['src/test/java']
+		}
+    }
+	integrationTest {
+        compileClasspath += sourceSets.test.compileClasspath + sourceSets.test.output
+        runtimeClasspath += output + sourceSets.test.runtimeClasspath
+
+	    java {
+		    srcDirs = []
+	    }
+        groovy {
+            srcDirs = ['src/it/java']
+        }
+        resources {
+            srcDirs = ['src/it/resources']
+        }
+    }
+}
+
+dependencies {
+	compile 'org.codehaus.groovy:groovy-all:2.2.2:indy'
+    testCompile group: 'junit', name: 'junit', version: '4.11'
+	testCompile  'org.dbunit:dbunit:2.4.9'
+}
